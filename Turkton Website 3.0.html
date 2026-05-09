@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turkton — We Market The Work. You Do The Work.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #D4A017;
+    --gold-light: #F0C040;
+    --gold-dim: #9A7410;
+    --dark: #1a1a1a;
+    --darker: #111111;
+    --darkest: #0a0a0a;
+    --charcoal: #2a2a2a;
+    --mid: #3a3a3a;
+    --text: #e8e8e0;
+    --muted: #888880;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--darkest);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 60px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212,160,23,0.15);
+    transition: padding 0.3s;
+  }
+
+  nav.scrolled { padding: 12px 60px; }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--darkest) !important;
+    padding: 8px 22px;
+    font-weight: 600 !important;
+    letter-spacing: 1px !important;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 60px 80px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(212,160,23,0.07) 0%, transparent 70%),
+      repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(212,160,23,0.03) 60px, rgba(212,160,23,0.03) 61px),
+      repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(212,160,23,0.03) 60px, rgba(212,160,23,0.03) 61px);
+  }
+
+  .hero-logo {
+    width: 420px;
+    max-width: 90%;
+    margin-bottom: 32px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 0.9s ease forwards 0.2s;
+  }
+
+  .hero-tagline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.5s;
+  }
+
+  .hero-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 0.95;
+    text-align: center;
+    letter-spacing: 2px;
+    max-width: 900px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.7s;
+  }
+
+  .hero-headline span { color: var(--gold); }
+
+  .hero-sub {
+    margin-top: 28px;
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--muted);
+    text-align: center;
+    max-width: 560px;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.9s;
+  }
+
+  .hero-actions {
+    margin-top: 48px;
+    display: flex;
+    gap: 20px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 1.1s;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--darkest);
+    padding: 14px 36px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--gold);
+    padding: 14px 36px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid var(--gold);
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover { background: rgba(212,160,23,0.1); transform: translateY(-2px); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 1.4s;
+  }
+
+  .hero-scroll span {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background: var(--charcoal);
+    border-top: 1px solid rgba(212,160,23,0.2);
+    border-bottom: 1px solid rgba(212,160,23,0.2);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .stat-item {
+    flex: 1;
+    max-width: 280px;
+    padding: 36px 40px;
+    text-align: center;
+    border-right: 1px solid rgba(212,160,23,0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+  .stat-item:last-child { border-right: none; }
+  .stat-item.visible { opacity: 1; transform: translateY(0); }
+
+  .stat-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 60px; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 60px);
+    line-height: 1;
+    letter-spacing: 1px;
+    max-width: 700px;
+  }
+
+  .section-title span { color: var(--gold); }
+
+  /* ── WHY SECTION ── */
+  .why {
+    background: var(--darker);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 60px;
+  }
+
+  .why-text p {
+    color: var(--muted);
+    line-height: 1.8;
+    margin-top: 24px;
+    font-size: 16px;
+  }
+
+  .why-text p + p { margin-top: 16px; }
+
+  .why-text strong { color: var(--text); font-weight: 500; }
+
+  .why-cards {
+    display: grid;
+    gap: 16px;
+  }
+
+  .why-card {
+    background: var(--charcoal);
+    border-left: 3px solid var(--gold);
+    padding: 24px 28px;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+  .why-card.visible { opacity: 1; transform: translateX(0); }
+
+  .why-card-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .why-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* ── VALUES ── */
+  .values-section {
+    background: var(--darkest);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .value-card {
+    background: var(--charcoal);
+    padding: 48px 36px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background 0.3s;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s, transform 0.5s, background 0.3s;
+  }
+
+  .value-card.visible { opacity: 1; transform: translateY(0); }
+
+  .value-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .value-card:hover::before { transform: scaleX(1); }
+  .value-card:hover { background: var(--mid); }
+
+  .value-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    color: rgba(212,160,23,0.12);
+    line-height: 1;
+    position: absolute;
+    top: 20px; right: 28px;
+  }
+
+  .value-icon {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .value-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .value-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ── SERVICES ── */
+  .services-section {
+    background: var(--darker);
+  }
+
+  .services-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .services-tabs {
+    display: flex;
+    gap: 0;
+    margin-top: 52px;
+    border-bottom: 1px solid rgba(212,160,23,0.2);
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    padding: 14px 28px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .tab-btn:hover { color: var(--text); }
+
+  .tab-content { display: none; padding-top: 52px; }
+  .tab-content.active { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+
+  .service-info .service-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    color: rgba(212,160,23,0.12);
+    line-height: 1;
+    margin-bottom: -12px;
+  }
+
+  .service-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    letter-spacing: 1px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .service-title span { color: var(--gold); }
+
+  .service-desc {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 28px;
+  }
+
+  .service-features {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+  }
+
+  .service-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .service-features li::before {
+    content: '—';
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .service-price-card {
+    background: var(--charcoal);
+    padding: 40px;
+    border-top: 3px solid var(--gold);
+  }
+
+  .service-price-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .service-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .service-price sub {
+    font-size: 18px;
+    color: var(--muted);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+  }
+
+  .service-result {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(212,160,23,0.15);
+  }
+
+  .service-result-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .service-result p {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  /* ── PACKAGES ── */
+  .packages-section {
+    background: var(--darkest);
+  }
+
+  .packages-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .packages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .package-card {
+    background: var(--charcoal);
+    padding: 48px 36px;
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+  .package-card.visible { opacity: 1; transform: translateY(0); }
+
+  .package-card.featured {
+    background: var(--mid);
+    outline: 2px solid var(--gold);
+    z-index: 2;
+  }
+
+  .package-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--darkest);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 16px;
+    white-space: nowrap;
+  }
+
+  .package-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .package-tagline {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .package-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .package-price sub {
+    font-size: 16px;
+    color: var(--muted);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+  }
+
+  .package-period {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .package-divider {
+    height: 1px;
+    background: rgba(212,160,23,0.15);
+    margin: 24px 0;
+  }
+
+  .package-features {
+    list-style: none;
+    display: grid;
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+
+  .package-features li {
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .package-features li::before {
+    content: '✓';
+    color: var(--gold);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .package-features li.disabled { opacity: 0.35; }
+  .package-features li.disabled::before { content: '×'; color: var(--muted); }
+
+  /* ── HOW IT WORKS ── */
+  .how-section {
+    background: var(--darker);
+  }
+
+  .how-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .how-steps {
+    margin-top: 60px;
+    position: relative;
+  }
+
+  .how-steps::before {
+    content: '';
+    position: absolute;
+    left: 26px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), rgba(212,160,23,0.1));
+  }
+
+  .how-step {
+    display: flex;
+    gap: 40px;
+    padding-bottom: 52px;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+  .how-step.visible { opacity: 1; transform: translateX(0); }
+
+  .how-step-num {
+    width: 52px;
+    height: 52px;
+    background: var(--gold);
+    color: var(--darkest);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .how-step-body {}
+
+  .how-step-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .how-step-desc {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 600px;
+  }
+
+  .how-step-tag {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 12px;
+    border: 1px solid rgba(212,160,23,0.3);
+    color: var(--gold);
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--charcoal);
+    text-align: center;
+    padding: 100px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: 'TURKTON';
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 240px;
+    color: rgba(212,160,23,0.04);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .cta-inner { position: relative; }
+
+  .cta-section .section-title {
+    margin: 0 auto 24px;
+    text-align: center;
+  }
+
+  .cta-sub {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 500px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+  }
+
+  .cta-contact {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    margin-top: 60px;
+    flex-wrap: wrap;
+  }
+
+  .contact-item {
+    text-align: center;
+  }
+
+  .contact-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .contact-value {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--gold);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--darkest);
+    border-top: 1px solid rgba(212,160,23,0.1);
+    padding: 40px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 4px;
+    color: var(--gold);
+  }
+
+  .footer-tagline {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  .footer-copy {
+    font-size: 11px;
+    color: rgba(136,136,128,0.5);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section { padding: 70px 24px; }
+    .why { grid-template-columns: 1fr; gap: 40px; padding: 70px 24px; }
+    .values-grid { grid-template-columns: 1fr; }
+    .packages-grid { grid-template-columns: 1fr; }
+    .tab-content.active { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+    .stats-bar { flex-direction: column; }
+    .stat-item { border-right: none; border-bottom: 1px solid rgba(212,160,23,0.1); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">TURKTON</a>
+  <ul class="nav-links">
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#values">Values</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#contact" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <img
+    src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAFdA2EDASIAAhEBAxEB/8QAHAABAQACAwEBAAAAAAAAAAAAAQACCAMGBwQF/8QAUBAAAgEEAAIFBgoECQsEAwAAAAECAwQFEQYhBxIxQVETFCJUYXEVMjZ0gZGSk7LRCFWhsxYjNTdCUnWxwRckM2Jyc4KDlMLwNEOi4RhTVv/EABsBAQACAwEBAAAAAAAAAAAAAAAFBgEDBAIH/8QAPxEBAAECAgYEDAUEAgIDAAAAAAECAwQRBRIhMUFRBmNxoRMVFiJhgaKxweHi8BQyNJHRIzM1YkJysvFSksL/2gAMAwEAAhEDEQA/ANe81lMjmspcZTLXte9vbmbnWr1puUpv2v8Aw7j4yIBEBARQCgEkRIBJkTAhQCgEUAoBJESARQCgEUAoCFAKARAQEBABEBAjIxEBEBARAQJCCEBQghAUIIQBiDECQghAUIIQFCCEBRAhAUIIQEiRAZERAJEQEICAkRAZEiIBFAKASREgMiQCgEUAoBAQARQCgIUAoBFAKARQCgIQFAIgIEZGJkBERAQgICICAoTEyAkIIQFCCEBQmKEBQghAiIgFH6PDmZyPD+btcxibh295az61OaW+7TTXemm014M/NHYHun/5JcQ//wA7i/vKn5keFkB5mREAiAgIoCAyJESASZEBCgFAIoBQCSIkAigFAIoBQEKAUAigFAICACICBCAgIgICICBCAgKEEIChBCAMQYgSEEIChBCAoQQgSEEIChBCAoiRAZIgQgIgIAICAkRAZEAgIoBASREAigFAIoBQCAgwEkRIBFAKARQCgEkRIBFAKARQCgIyMRQCREBCAoBEBQEICgEQFARkYigEQFAImIoBIiAiIgIiIDzQiIBEBASIgMiREAkRAQoBQCSIkBkSAUAigFAIoCQCKAUAigFAICACICgIQFAIgIEZGJkBCAgIgIEjIxMgIiZASEEIChBCAoTFGQEhBCAoQQgKIEIChBCAoQQgAgICRIgEQEBEEQGREQCICAkRAZERARIiARQCAkiIBFAICKAkBkSIkAigFAJEQEKAkBkSAQEUBAZEgEBFAQGRAhARMRARQEAiBAZEAgQgQGRAICQCAiYiAkGxASAdgJbAQEgHYEOwIBExHYCBCAEJAREACQCBbHYEA7ICASAgEgIDoooCAyJEQCKAgMiREAigEBJEQGRAICRIgIQIDIgQgIghASBCAoTFCAoQEBQmIgKECQCIEBkQbEB2QFsBENkAkBAeaoQQgKEEICiJEAiCEBIkQEIEBkREAiAgIoCAyJEQCKAUAkiJAZARMBJAKARQCgEUBIBFAKARQCgEUBIBFAKAQEAEQFARkYiAiAgIgIEZGIgIgICICBIQECIiAUICAoTEyAkICAoQECRkYiAoQEBQmJkACRASEBAUICBIQEBQgIChMRAUICgFCYigEiICECQGRIBASIgEQRAOxAtgI7AgMiMR2AkGy2AkBAeboQQgKEEIEhBCAoQQgKIkQEREBkiBCAiCEBIiAyIBARAgMiIgEmRAQoBARQEBkSIkAigFAIoCQGRIBQCKAUAg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"
+    class="hero-logo"
+    alt="Turkton"
+  />
+  <p class="hero-tagline">Trades Marketing Agency</p>
+  <h1 class="hero-headline">We get your <span>phone ringing.</span></h1>
+  <p class="hero-sub">Professional marketing built exclusively for local trades companies. More reviews, more visibility, more work — handled for you every month.</p>
+  <div class="hero-actions">
+    <a href="#services" class="btn-primary">Our Services</a>
+    <a href="#contact" class="btn-outline">Get Started</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-number">6</div>
+    <div class="stat-label">Core Services</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">5★</div>
+    <div class="stat-label">Review Generation</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">100%</div>
+    <div class="stat-label">Local Focus</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">0</div>
+    <div class="stat-label">Long-term Contracts</div>
+  </div>
+</div>
+
+<!-- WHY -->
+<div id="why" style="background: var(--darker); padding: 100px 60px;">
+  <div class="why" style="padding: 0;">
+    <div class="why-text reveal">
+      <p class="section-label">Why Turkton</p>
+      <h2 class="section-title">Built for the trades. <span>Built for growth.</span></h2>
+      <p>You didn't get into the trades to spend your evenings posting on social media or chasing Google reviews. You got in it because you're exceptional at what you do — and your reputation should reflect that.</p>
+      <p>Turkton was built for <strong>trades companies across Greater Vancouver</strong> who are great at their work but don't have the time, tools, or team to market themselves properly. We handle your entire marketing presence so you can focus on the jobs.</p>
+      <p>No complicated contracts. No guesswork. Just <strong>consistent, professional marketing</strong> that builds your reputation and keeps your phone ringing.</p>
+    </div>
+    <div class="why-cards">
+      <div class="why-card">
+        <div class="why-card-title">You're too busy</div>
+        <p>You're on the tools all day. Marketing falls to the bottom of the list — until a competitor with half your skill starts getting all the calls because they have 50 reviews and you have 8.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-title">Reviews win jobs</div>
+        <p>80% of homeowners check Google reviews before calling a trades company. We make sure you have a steady stream of real, recent reviews that build trust before you even answer the phone.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-title">Visible work = more work</div>
+        <p>Your best before/after jobs are sitting on your phone. We turn them into compelling content that reaches homeowners in your neighbourhood who need exactly what you do.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-title">Past clients are gold</div>
+        <p>Most trades companies have hundreds of satisfied past clients they've never contacted again. We reactivate that list into recurring revenue — spring cleanups, annual services, referrals.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VALUES -->
+<section id="values" class="values-section">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <p class="section-label reveal">Our Values</p>
+    <h2 class="section-title reveal">What we <span>stand for</span></h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <span class="value-number">01</span>
+        <div class="value-icon">◆</div>
+        <div class="value-title">Results first</div>
+        <p class="value-desc">We measure success in calls booked, reviews earned, and jobs won — not impressions or reach. Every service we provide has a direct line to your bottom line.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-number">02</span>
+        <div class="value-icon">◆</div>
+        <div class="value-title">Respect for the trade</div>
+        <p class="value-desc">We understand that trades work is skilled, physical, and essential. We market your work with the pride and professionalism it deserves — never generic, never lazy.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-number">03</span>
+        <div class="value-icon">◆</div>
+        <div class="value-title">Radical transparency</div>
+        <p class="value-desc">You'll always know exactly what we're doing and why. Monthly reports show your review count before and after, post reach, and every campaign we ran on your behalf.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-number">04</span>
+        <div class="value-icon">◆</div>
+        <div class="value-title">Local over everything</div>
+        <p class="value-desc">We focus exclusively on Greater Vancouver trades companies. We know the neighbourhoods, the stratas, the seasons, and the community — and we use that to your advantage.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-number">05</span>
+        <div class="value-icon">◆</div>
+        <div class="value-title">Long-term partnership</div>
+        <p class="value-desc">We're not here to do a job and disappear. We grow with you — and as your reputation builds, we evolve your strategy to match your expanding business.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-number">06</span>
+        <div class="value-icon">◆</div>
+        <div class="value-title">No fluff</div>
+        <p class="value-desc">No buzzwords, no padded reports, no vanity metrics. We tell you the truth about what's working, what isn't, and what we're going to do about it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services-section">
+  <div class="services-inner">
+    <p class="section-label reveal">What We Do</p>
+    <h2 class="section-title reveal">Our <span>services</span></h2>
+    <div class="services-tabs">
+      <button class="tab-btn active" onclick="showTab('reviews')">Reviews</button>
+      <button class="tab-btn" onclick="showTab('gbp')">Google Business</button>
+      <button class="tab-btn" onclick="showTab('content')">Content</button>
+      <button class="tab-btn" onclick="showTab('reactivation')">Reactivation</button>
+      <button class="tab-btn" onclick="showTab('hiring')">Job Postings</button>
+      <button class="tab-btn" onclick="showTab('prospecting')">Prospecting</button>
+    </div>
+
+    <div id="tab-reviews" class="tab-content active">
+      <div class="service-info">
+        <div class="service-number">01</div>
+        <div class="service-title">Google <span>Reviews</span></div>
+        <p class="service-desc">The single highest ROI service we offer. After every completed job, your customer receives a personalised text with a direct link to leave a Google review. We track every request, every response, and report your growth monthly.</p>
+        <ul class="service-features">
+          <li>Personalised SMS sent after every completed job</li>
+          <li>Custom message uses customer name and job type</li>
+          <li>Direct link to your Google review page</li>
+          <li>Dashboard tracking all requests and responses</li>
+          <li>Monthly before/after review count report</li>
+          <li>Email backup for customers who prefer it</li>
+        </ul>
+      </div>
+      <div class="service-price-card">
+        <div class="service-price-label">Monthly investment</div>
+        <div class="service-price">$99<sub>–$149/mo</sub></div>
+        <div class="service-result">
+          <div class="service-result-label">What to expect</div>
+          <p>Most clients see their Google review count double within 60 days — directly translating to more calls from homeowners who check reviews before contacting anyone.</p>
+        </div>
+        <a href="#contact" class="btn-primary" style="margin-top: 28px; display: inline-block;">Get started</a>
+      </div>
+    </div>
+
+    <div id="tab-gbp" class="tab-content">
+      <div class="service-info">
+        <div class="service-number">02</div>
+        <div class="service-title">Google <span>Business Profile</span></div>
+        <p class="service-desc">Most trades companies set up their Google Business Profile once and never touch it again. Regular posts, updated photos, and keyword-optimised descriptions directly affect how high you show up in local searches — free visibility you're currently leaving on the table.</p>
+        <ul class="service-features">
+          <li>2× weekly posts with job photos and copy</li>
+          <li>Seasonal offers and service updates</li>
+          <li>Keyword-optimised business description</li>
+          <li>New project photos added monthly</li>
+          <li>Monitor and flag new reviews for response</li>
+          <li>Complete profile audit and optimisation</li>
+        </ul>
+      </div>
+      <div class="service-price-card">
+        <div class="service-price-label">Monthly investment</div>
+        <div class="service-price">$99<sub>–$129/mo</sub></div>
+        <div class="service-result">
+          <div class="service-result-label">What to expect</div>
+          <p>An active, optimised profile ranks higher in the Google Maps results — meaning when someone searches "landscaping near me" in your area, you appear before competitors who aren't posting.</p>
+        </div>
+        <a href="#contact" class="btn-primary" style="margin-top: 28px; display: inline-block;">Get started</a>
+      </div>
+    </div>
+
+    <div id="tab-content" class="tab-content">
+      <div class="service-info">
+        <div class="service-number">03</div>
+        <div class="service-title">Before/After <span>Content</span></div>
+        <p class="service-desc">Trades are visual businesses. A power washing or landscaping company that posts consistent before/after content builds trust faster than any ad. Homeowners scroll Facebook and see a driveway that looks exactly like theirs — that's a call waiting to happen.</p>
+        <ul class="service-features">
+          <li>Branded graphic template in your company colours</li>
+          <li>Professionally written captions and hashtags</li>
+          <li>3 posts per week across Facebook and Instagram</li>
+          <li>Monthly seasonal content calendar</li>
+          <li>Consistent branding — logo, colours, fonts every post</li>
+          <li>Stories and reels scripts included</li>
+        </ul>
+      </div>
+      <div class="service-price-card">
+        <div class="service-price-label">Monthly investment</div>
+        <div class="service-price">$149<sub>–$199/mo</sub></div>
+        <div class="service-result">
+          <div class="service-result-label">What to expect</div>
+          <p>A consistent visual presence that positions you as the professional, established choice in your area. Neighbours who see your work on a nearby property recognise your brand when they're ready to hire.</p>
+        </div>
+        <a href="#contact" class="btn-primary" style="margin-top: 28px; display: inline-block;">Get started</a>
+      </div>
+    </div>
+
+    <div id="tab-reactivation" class="tab-content">
+      <div class="service-info">
+        <div class="service-number">04</div>
+        <div class="service-title">Client <span>Reactivation</span></div>
+        <p class="service-desc">Your most underutilised asset is sitting in your phone's contact list. Past clients already trust you — they just haven't heard from you. A well-timed, personalised message is all it takes to turn last year's job into this year's recurring revenue.</p>
+        <ul class="service-features">
+          <li>Upload your past client list once</li>
+          <li>Personalised messages per client and service type</li>
+          <li>Seasonal campaigns — spring cleanup, fall prep, annual checkup</li>
+          <li>Referral request follow-ups built in</li>
+          <li>Track replies and booked jobs per campaign</li>
+          <li>Completely hands-off once set up</li>
+        </ul>
+      </div>
+      <div class="service-price-card">
+        <div class="service-price-label">Monthly investment</div>
+        <div class="service-price">$79<sub>–$99/mo</sub></div>
+        <div class="service-result">
+          <div class="service-result-label">What to expect</div>
+          <p>Clients with a list of 100+ past customers typically see 8–15 responses per campaign. That's real, booked revenue from people who already know and trust your work.</p>
+        </div>
+        <a href="#contact" class="btn-primary" style="margin-top: 28px; display: inline-block;">Get started</a>
+      </div>
+    </div>
+
+    <div id="tab-hiring" class="tab-content">
+      <div class="service-info">
+        <div class="service-number">05</div>
+        <div class="service-title">Job <span>Postings</span></div>
+        <p class="service-desc">Finding reliable tradespeople is one of the biggest challenges for growing companies. We write professional job listings and distribute them across local Facebook groups, community boards, and job platforms — so you can grow your crew without the headache.</p>
+        <ul class="service-features">
+          <li>Professional job description written per role</li>
+          <li>Posted to local Facebook groups and community boards</li>
+          <li>Indeed, Craigslist, and other platforms covered</li>
+          <li>Compelling listings that attract reliable applicants</li>
+          <li>Multiple postings for seasonal hiring bursts</li>
+          <li>Re-post and refresh on request</li>
+        </ul>
+      </div>
+      <div class="service-price-card">
+        <div class="service-price-label">Monthly investment</div>
+        <div class="service-price">$79<sub>–$129/mo</sub></div>
+        <div class="service-result">
+          <div class="service-result-label">What to expect</div>
+          <p>Professional listings distributed across multiple platforms reach applicants that a basic post wouldn't. Better quality copy attracts better quality candidates.</p>
+        </div>
+        <a href="#contact" class="btn-primary" style="margin-top: 28px; display: inline-block;">Get started</a>
+      </div>
+    </div>
+
+    <div id="tab-prospecting" class="tab-content">
+      <div class="service-info">
+        <div class="service-number">06</div>
+        <div class="service-title">Client <span>Prospecting</span></div>
+        <p class="service-desc">We identify and engage with local homeowners, strata managers, property managers, and district contacts who are actively looking for trades services. Organic Facebook outreach, community group engagement, and targeted connection building — done for you.</p>
+        <ul class="service-features">
+          <li>Posts in local neighbourhood Facebook groups</li>
+          <li>Strata and property manager email outreach</li>
+          <li>Natural, non-spammy community engagement</li>
+          <li>Identify people already asking for your service type</li>
+          <li>District and commercial connection building</li>
+          <li>Monthly new connection and lead report</li>
+        </ul>
+      </div>
+      <div class="service-price-card">
+        <div class="service-price-label">Monthly investment</div>
+        <div class="service-price">$99<sub>–$149/mo</sub></div>
+        <div class="service-result">
+          <div class="service-result-label">What to expect</div>
+          <p>Strata and property manager relationships can unlock recurring, high-volume contracts. One strata deal can be worth $5,000–$20,000 in seasonal work across dozens of units.</p>
+        </div>
+        <a href="#contact" class="btn-primary" style="margin-top: 28px; display: inline-block;">Get started</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages" class="packages-section">
+  <div class="packages-inner">
+    <p class="section-label reveal">Pricing</p>
+    <h2 class="section-title reveal">Simple, <span>honest pricing</span></h2>
+    <div class="packages-grid">
+      <div class="package-card">
+        <div class="package-name">Starter</div>
+        <div class="package-tagline">Get found and get reviewed</div>
+        <div class="package-price">$199<sub>–249</sub></div>
+        <div class="package-period">per month · no contracts</div>
+        <div class="package-divider"></div>
+        <ul class="package-features">
+          <li>Google Review Generation</li>
+          <li>Google Business Profile Management</li>
+          <li class="disabled">Before/After Content</li>
+          <li class="disabled">Past Client Reactivation</li>
+          <li class="disabled">Job Postings</li>
+          <li class="disabled">Client Prospecting</li>
+        </ul>
+        <a href="#contact" class="btn-outline" style="width: 100%; text-align: center; display: block;">Get started</a>
+      </div>
+      <div class="package-card featured">
+        <div class="package-badge">Most Popular</div>
+        <div class="package-name">Growth</div>
+        <div class="package-tagline">Build your presence and reputation</div>
+        <div class="package-price">$299<sub>–349</sub></div>
+        <div class="package-period">per month · no contracts</div>
+        <div class="package-divider"></div>
+        <ul class="package-features">
+          <li>Google Review Generation</li>
+          <li>Google Business Profile Management</li>
+          <li>Before/After Content Creation</li>
+          <li class="disabled">Past Client Reactivation</li>
+          <li class="disabled">Job Postings</li>
+          <li class="disabled">Client Prospecting</li>
+        </ul>
+        <a href="#contact" class="btn-primary" style="width: 100%; text-align: center; display: block;">Get started</a>
+      </div>
+      <div class="package-card">
+        <div class="package-name">Full Package</div>
+        <div class="package-tagline">Complete marketing system</div>
+        <div class="package-price">$449<sub>–549</sub></div>
+        <div class="package-period">per month · no contracts</div>
+        <div class="package-divider"></div>
+        <ul class="package-features">
+          <li>Google Review Generation</li>
+          <li>Google Business Profile Management</li>
+          <li>Before/After Content Creation</li>
+          <li>Past Client Reactivation</li>
+          <li>Job Postings</li>
+          <li>Client Prospecting</li>
+        </ul>
+        <a href="#contact" class="btn-outline" style="width: 100%; text-align: center; display: block;">Get started</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="how-section">
+  <div class="how-inner">
+    <p class="section-label reveal">The Process</p>
+    <h2 class="section-title reveal">How it <span>works</span></h2>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-step-num">1</div>
+        <div class="how-step-body">
+          <div class="how-step-title">We learn your business</div>
+          <p class="how-step-desc">A quick onboarding call where we learn your trade, service area, ideal clients, and what makes you different. We set up your dashboard and build your branded templates.</p>
+          <span class="how-step-tag">One-time · 30 minutes</span>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">2</div>
+        <div class="how-step-body">
+          <div class="how-step-title">You send us job completions</div>
+          <p class="how-step-desc">After each job, you shoot us a quick text — customer name, number, and ideally a before/after photo. That's it. Everything else is handled by us.</p>
+          <span class="how-step-tag">2 minutes per job</span>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">3</div>
+        <div class="how-step-body">
+          <div class="how-step-title">We handle the marketing</div>
+          <p class="how-step-desc">Review requests go out automatically. Content gets created and posted. Your Google Business Profile stays active. Past clients get re-engaged. All done for you, consistently, every month.</p>
+          <span class="how-step-tag">Fully managed</span>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">4</div>
+        <div class="how-step-body">
+          <div class="how-step-title">You see the results</div>
+          <p class="how-step-desc">Monthly reports show your review count growth, post reach, reactivation responses, and jobs booked. We have a 30-minute check-in each month to review what's working and what we're doing next.</p>
+          <span class="how-step-tag">Monthly report + check-in</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact" class="cta-section">
+  <div class="cta-inner">
+    <p class="section-label">Ready to grow</p>
+    <h2 class="section-title">Let's get your <span>phone ringing.</span></h2>
+    <p class="cta-sub">No long-term contracts. No setup fees. Just professional marketing that builds your reputation and brings in more work every month.</p>
+    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+      <a href="mailto:turktonmarketing@gmail.com" class="btn-primary">Email Us</a>
+      <a href="tel:+16043525041" class="btn-outline">Call Us</a>
+    </div>
+    <div class="cta-contact">
+      <div class="contact-item">
+        <div class="contact-label">Email</div>
+        <div class="contact-value">turktonmarketing@gmail.com</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Phone</div>
+        <div class="contact-value">604-352-5041</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Service Area</div>
+        <div class="contact-value">Greater Vancouver</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Response time</div>
+        <div class="contact-value">Within 24 hours</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">TURKTON</div>
+  <div class="footer-tagline">We Market The Work. You Do The Work.</div>
+  <div class="footer-copy">© 2026 Turkton. Greater Vancouver, BC.</div>
+</footer>
+
+<script>
+  // NAV scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Intersection Observer for reveals
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, entry.target.dataset.delay || 0);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal, .stat-item, .why-card, .value-card, .how-step, .package-card').forEach((el, i) => {
+    el.dataset.delay = (i % 4) * 100;
+    observer.observe(el);
+  });
+
+  // Tabs
+  function showTab(id) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
